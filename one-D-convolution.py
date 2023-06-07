@@ -28,12 +28,12 @@ def identify_maxima(peaks, FLAT_THRESH = 200, HEIGHT_THRESH = 10000, WIDTH_THRES
 
     if k >= WIDTH_THRESH:
       maxima.append(int((i + k)- (k/2)))
-      i +=k
-    else:
-      i+=1
+
+    i+= k if k >=1 else 1
+
   return maxima
 
-input = cv2.imread('./poles.jpg')
+input = cv2.imread('./multiple_poles.png')
 img = cv2.cvtColor(input, cv2.COLOR_BGR2HLS)
 
 lowHLS = np.array([0, 52.4, 42.5]) # low color bound
@@ -61,4 +61,3 @@ for max in maxima:
 
 cv2.imshow("image", input)
 cv2.waitKey(0)
-
